@@ -35,7 +35,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     let  url  = req.query.image_url;
     
     if (!url){
-      res.status(400).send('Param image_url shoud be mandatory');
+      res.status(400).send('Param image url should be mandatory');
     }
    
     let photo = await filterImageFromURL(url);
