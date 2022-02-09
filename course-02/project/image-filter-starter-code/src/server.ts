@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response }from 'express';
 import bodyParser from 'body-parser';
 
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
@@ -30,22 +30,22 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   /**************************************************************************** */
 
-  app.get('/filteredimage', async (req, res) => { 
+  app.get('/filteredimage', async (req: Request, res: Response) => { 
     
-    let  url  = req.query.image_url;
+    let  url: string  = req.query.image_url;
     
     if (!url){
       res.status(400).send('Param image url should be mandatory');
     }
    
-    let photo = await filterImageFromURL(url);
+    let photo: string = await filterImageFromURL(url);
    
     res.sendFile(photo,function(err){
       if(err){
         res.status(500).send(err);
       }
       else{
-        const array_photo = [photo];
+        const array_photo: Array<string> = [photo];
         deleteLocalFiles(array_photo);             
       }
     });
@@ -56,7 +56,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: Request, res: Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
