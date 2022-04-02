@@ -15,10 +15,10 @@ custom:
         title: TODOS
         description: Serverless application TODOS
     models:
-      - name: CreateTodoRequest
+      - name: CreateRequest
         contentType: application/json
         schema: ${file(models/create-todo-model.json)}
-      - name: UpdateTodoRequest
+      - name: UpdateRequest
         contentType: application/json
         schema: ${file(models/update-todo-model.json)}
 
@@ -101,8 +101,10 @@ functions:
           documentation:
             summary: Create a new task
             description: Create a new task
+            requestBody:
+              description: "create todo"
             requestModels:
-              "application/json": CreateTodoRequest
+              "application/json": CreateRequest
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -128,7 +130,7 @@ functions:
             summary: Create a new task
             description: Create a new task
             requestModels:
-              "application/json": UpdateTodoRequest
+              "application/json": UpdateRequest
     iamRoleStatements:
       - Effect: Allow
         Action:

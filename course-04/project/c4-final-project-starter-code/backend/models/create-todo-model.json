@@ -1,13 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "group",
+  "title": "TODOS",
   "type": "object",
   "properties": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "dueDate": {
-      "type": "string"
+      "type": "string",      
+      "minLength": 10
+
     }
   },
   "required": [
