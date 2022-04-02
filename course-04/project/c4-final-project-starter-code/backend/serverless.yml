@@ -1,13 +1,26 @@
-# TODO: Change the name of the org 
-#org: claudio-dantas
-#app: serverless-todo-app
 service: serverless-todo-app
 
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
-  - serverless-plugin-tracing
+  - serverless-reqvalidator-plugin
+  - serverless-aws-documentation
   
+
+custom:
+  documentation:
+    api:
+      info:
+        version: v1.0.0
+        title: TODOS
+        description: Serverless application TODOS
+    models:
+      - name: CreateTodoRequest
+        contentType: application/json
+        schema: ${file(models/create-todo-model.json)}
+      - name: UpdateTodoRequest
+        contentType: application/json
+        schema: ${file(models/update-todo-model.json)}
 
 provider:
   name: aws
@@ -86,8 +99,8 @@ functions:
           authorizer: Auth
           reqValidatorName: RequestBodyValidator
           documentation:
-            summary: Create a new group
-            description: Create a new group
+            summary: Create a new task
+            description: Create a new task
             requestModels:
               "application/json": CreateTodoRequest
     iamRoleStatements:
@@ -112,8 +125,8 @@ functions:
           authorizer: Auth
           reqValidatorName: RequestBodyValidator
           documentation:
-            summary: Create a new group
-            description: Create a new group
+            summary: Create a new task
+            description: Create a new task
             requestModels:
               "application/json": UpdateTodoRequest
     iamRoleStatements:
