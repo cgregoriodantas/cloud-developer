@@ -50,7 +50,7 @@ export class GroupsList extends React.PureComponent<GroupsListProps, GroupsListS
         <Divider clearing />
 
         <Card.Group>
-          {this.state.groups.map(group => {
+          {this.state.groups.map((group) => {
             return <Group key={group.id} group={group} />
           })}
         </Card.Group>
